@@ -7,9 +7,14 @@ module.exports = {
   ],
   theme: {
     extend: {
+      container: {
+        center: true,
+        padding: "15px",
+      },
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        accent: "#07966b",
+        weblite: "#EA704F",
+        dark: "#1B1B1B",
       },
     },
   },
