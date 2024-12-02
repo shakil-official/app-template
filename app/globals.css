@@ -57,3 +57,31 @@
     color: #000000;
 
 }
+
+/* Desktop Version: Show the slider */
+.desktop-slider {
+    display: block; /* Slider shown only on larger screens */
+}
+
+/* Mobile Version: Adjust Image */
+.mobile-slider img {
+    width: 100%; /* Ensure full width on mobile */
+    object-fit: contain; /* Prevent cropping */
+}
+
+/* Hide desktop slider for small screens */
+@media (max-width: 1024px) {
+    .desktop-slider {
+        display: none;
+    }
+
+    /* Show mobile image instead on smaller screens */
+    .mobile-slider {
+        display: block;
+    }
+
+    .mobile-image {
+        width: 100%;  /* Ensure full width */
+        object-fit: contain; /* Adjust to fit without cropping */
+    }
+}

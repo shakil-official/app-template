@@ -7,7 +7,7 @@ const AddToCart = ({handleAddToCart}) => {
         <>
             <button className="bg-green-500
                                 text-white font-bold text-sm py-2
-                                px-4 rounded-md hover:opacity-100
+                                px-2 rounded-md hover:opacity-100
                                 transition-all duration-300 w-full"
                     onClick={handleAddToCart}>
                 <FaShoppingCart size={14} className="inline mr-2"/>Add to cart

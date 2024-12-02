@@ -10,7 +10,8 @@ const OrderNow = ({handleOrderNow}) => {
                             py-2 px-4 rounded-md hover:opacity-100
                             transition-all duration-300 w-full"
                 onClick={handleOrderNow}>
-                <FaShoppingCart size={14} className="inline mr-2"/> Order
+                {/* <FaShoppingCart size={14} className="inline mr-2"/>  */}
+                Order
             </button>
 
         </>

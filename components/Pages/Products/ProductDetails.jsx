@@ -1,4 +1,6 @@
-import React, {useState} from 'react';
+"use client";
+
+import React, { useState } from "react";
 import ExpandableText from "./ExpandableText.jsx";
 import AddToCart from "./AddToCart.jsx";
 import OrderNow from "./OrderNow.jsx";
@@ -8,69 +10,84 @@ import TopNav from "../Navbar/TopNav.jsx";
 import Navbar from "../Navbar/Navbar.jsx";
 import QuantityInput from "./QuantityInput.jsx";
 
-const ProductDetails = ({}) => {
-    const [isOpeOrder, setIsOpenOrder] = useState(false);
+const ProductDetails = () => {
+    const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
 
-    const handleOrderModalClose = () => {
-        setIsOpenOrder(!isOpeOrder);
-    }
-
-    const handleQuantityChange = (newQuantity) => {
-         console.log("Updated Quantity:", newQuantity);
+    const toggleOrderModal = () => {
+        setIsOrderModalOpen(!isOrderModalOpen);
     };
 
+    const handleQuantityChange = (newQuantity) => {
+        console.log("Updated Quantity:", newQuantity);
+    };
 
-    const {title, description, id, image} = {
+    const product = {
         id: 1,
-        title: "This is a product ",
-        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s.",
-        image: "https://images.pexels.com/photos/229789/pexels-photo-229789.jpeg"
-
+        title: "Premium Organic Product",
+        description:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. With its popularity surging in the 1960s, it has continued to serve as placeholder text in the design world. Its adaptability across various applications makes it a staple in digital and print layouts.",
+        image: "https://images.pexels.com/photos/229789/pexels-photo-229789.jpeg",
+        price: 99.99,
+        unit: "Per Kg",
     };
 
     return (
         <>
-            <TopNav/>
+            <TopNav />
+            <Navbar />
 
-            <Navbar/>
+            <div className="container mx-auto p-6 lg:p-12">
+                {/* Page Header */}
+                <h1 className="text-4xl font-bold text-gray-800 mb-8 ">Product Details</h1>
 
-            <div className="container p-8">
-                <h2 className="text-3xl font-bold mb-6 text-left">Products Details</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
-
-                    <Modal isOpen={isOpeOrder} handleClose={handleOrderModalClose}>
-                        <OrderForm/>
-                    </Modal>
-
-
-                    <div className="w-full md:w-1/1">
-                        <img src={image} alt={title} className="w-full rounded-lg"/>
+                {/* Product Details Section */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                    {/* Product Image */}
+                    <div className="w-full">
+                        <img
+                            src={product.image}
+                            alt={product.title}
+                            className="w-full rounded-lg shadow-lg"
+                        />
                     </div>
 
-                    {/* Product Details */}
-                    <div className="w-full md:w-1/1 space-y-4">
-                        <h2 className="text-2xl font-bold">{title}</h2>
-                        <p className="text-gray-600">
-                            <ExpandableText description={description} limit={700}/>
-                        </p>
+                    {/* Product Information */}
+                    <div className="space-y-6">
+                        <h2 className="text-3xl font-bold text-gray-800">{product.title}</h2>
 
-                        <div className="product-cost">
-                            <QuantityInput initialValue={1} min={1} step={1} onQuantityChange={handleQuantityChange} />
+                        {/* Expandable Description */}
+                        <ExpandableText description={product.description} limit={300} />
 
-                            <p className="text-lg font-semibold text-green-600 main-cost">$99.99 <span className="unit"> Per Kg</span>   </p>
+                        {/* Price and Quantity */}
+                        <div className="flex items-center justify-between">
+                            <QuantityInput
+                                initialValue={1}
+                                min={1}
+                                step={1}
+                                onQuantityChange={handleQuantityChange}
+                            />
+                           <p className="text-2xl font-semibold text-green-600">
+    ${product.price.toFixed(2)} 
+    <span className="text-sm text-gray-500 font-normal ml-2">{product.unit}</span>
+</p>
+
                         </div>
 
-
-                        <AddToCart/>
-                        <OrderNow handleOrderNow={handleOrderModalClose}/>
-
+                        {/* Actions */}
+                        <div className="flex items-center gap-4">
+                            <AddToCart />
+                            <OrderNow handleOrderNow={toggleOrderModal} />
+                        </div>
                     </div>
                 </div>
+
+                {/* Order Form Modal */}
+                <Modal isOpen={isOrderModalOpen} handleClose={toggleOrderModal}>
+                    <OrderForm />
+                </Modal>
             </div>
-
-
         </>
-    )
-}
+    );
+};
 
 export default ProductDetails;

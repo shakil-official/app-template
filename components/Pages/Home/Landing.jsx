@@ -10,6 +10,8 @@ import Navbar from "../Navbar/Navbar.jsx";
 import HeroSlider from "./HeroSlider.jsx";
 import Product from "../Products/Product.jsx";
 import {TbCategoryFilled} from "react-icons/tb";
+import Footer from "./Footer.jsx";
+
 
 const Landing = () => {
 
@@ -83,21 +85,21 @@ const Landing = () => {
     const slideData = [
         {
             id: 0,
-            img: "https://placehold.co/1920x600", // Ensure this image exists in your public folder
+            img: "/images/img1.png", // Ensure this image exists in your public folder
             title: "Trending Item",
             mainTitle: "Vegetables for Good",
             price: "$20",
         },
         {
             id: 1,
-            img: "https://placehold.co/1920x600", // Ensure this image exists in your public folder
+            img: "/images/img2.png", // Ensure this image exists in your public folder
             title: "Trending Item2",
             mainTitle: "Vegetables for Good",
             price: "$20",
         },
         {
             id: 2,
-            img: "https://placehold.co/1920x600", // Ensure this image exists in your public folder
+            img: "/images/img3.png", // Ensure this image exists in your public folder
             title: "On Sale",
             mainTitle: "Coffee for Relax",
             price: "$20",
@@ -131,7 +133,7 @@ const Landing = () => {
                 <div className="flex justify-center items-center space-x-2  ">
 
                     <button className="bg-yellow-400 text-black
-                                        font-bold text-sm py-2
+                                        font-bold text-sm py-4
                                         px-4 rounded-md opacity-60
                                         group-hover:opacity-100
                                         transition-all duration-300 w-full">
@@ -141,8 +143,8 @@ const Landing = () => {
                         The Basket Shop
                     </button>
 
-                    <button className="bg-yellow-400 text-black
-                                        font-bold text-sm py-2
+                    <button className="bg-green-200 text-black
+                                        font-bold text-sm py-4
                                         px-4 rounded-md opacity-60
                                         group-hover:opacity-100
                                         transition-all duration-300 w-full">
@@ -158,14 +160,14 @@ const Landing = () => {
             <div className="container p-8">
                 <h2 className="text-3xl font-bold mb-6 text-center">Category</h2>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-8 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-8 gap-2">
                     {
                         categories.map((category, index) => (
 
                                 <React.Fragment key={index}>
-                                    <button className="bg-black text-white
-                                                        font-bold text-sm py-1
-                                                        px-4 rounded-md opacity-60
+                                    <button className="bg-blue-700 text-white
+                                                        font-bold text-sm py-2
+                                                        px-3 rounded-md opacity-60
                                                         group-hover:opacity-100
                                                         transition-all duration-300 w-full">
                                         <TbCategoryFilled size={14} className="inline mr-2"/>
@@ -179,24 +181,25 @@ const Landing = () => {
             </div>
 
 
-            <div className="container p-8">
-                <h2 className="text-3xl font-bold mb-6 text-left">Products</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {card.map((item, index) => (
+            <div className="container p-8 mx-auto">
+    <h2 className="text-3xl font-bold mb-6 text-left">Products</h2>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {card.map((item, index) => (
+            <React.Fragment key={index}>
+                <Product
+                    id={item.id}
+                    title={item.title}
+                    description={item.description}
+                    image={item.image}
+                />
+            </React.Fragment>
+        ))}
+    </div>
+</div>
 
-                            <React.Fragment key={index}>
-                                <Product key={item.id}
-                                         id={item.id}
-                                         title={item.title}
-                                         description={item.description}
-                                         image={item.image}
-                                />
-                            </React.Fragment>
-                        )
-                    )}
-                </div>
-            </div>
+<Footer/>
         </>
+        
     );
 };
 
